@@ -182,6 +182,85 @@ a { color: inherit; text-decoration: none; }
     margin-right: auto;
 }
 
+/* ===== Extension Install Banner ===== */
+.extension-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,206,201,0.1));
+    border: 1px solid rgba(108,92,231,0.3);
+    border-radius: var(--radius);
+    padding: 14px 24px;
+    margin-bottom: 28px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all var(--transition);
+    max-width: 620px;
+}
+
+.extension-banner:hover {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(108,92,231,0.25), rgba(0,206,201,0.15));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(108,92,231,0.2);
+}
+
+.extension-banner-icon {
+    flex-shrink: 0;
+    background: var(--primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.extension-banner-text {
+    text-align: left;
+    line-height: 1.4;
+}
+
+.extension-banner-text strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.extension-banner-text span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.extension-banner-btn {
+    flex-shrink: 0;
+    background: var(--primary);
+    color: white;
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: background var(--transition);
+}
+
+.extension-banner:hover .extension-banner-btn {
+    background: var(--primary-dark);
+}
+
+@media (max-width: 600px) {
+    .extension-banner {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        gap: 10px;
+        padding: 14px 16px;
+    }
+    .extension-banner-text { text-align: center; }
+    .extension-banner-btn { width: 100%; text-align: center; }
+}
+
 .search-wrapper { max-width: 600px; margin: 0 auto; }
 
 .search-box {
