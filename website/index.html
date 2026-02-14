@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniSearch - Unicode Symbol Search & Copy Tool</title>
+    <meta name="description" content="Search, browse and copy Unicode symbols, emojis, math symbols, currency signs, arrows and more. Free online Unicode character finder.">
+    <meta name="keywords" content="unicode, symbols, emoji, copy paste, special characters, math symbols, currency symbols, arrows, unicode search">
+    <meta name="author" content="UniSearch">
+    <meta property="og:title" content="UniSearch - Unicode Symbol Search & Copy Tool">
+    <meta property="og:description" content="Search, browse and copy Unicode symbols instantly. Emojis, math, currency, arrows and more.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔣</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <span class="logo-icon">🔣</span>
+                    <span class="logo-text">Uni<span class="logo-highlight">Search</span></span>
+                </a>
+                <nav class="nav">
+                    <a href="categories.html" class="nav-link">Categories</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="https://chrome.google.com/webstore" target="_blank" class="nav-link btn-extension">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+                        Chrome Extension
+                    </a>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle dark/light theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </button>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Search Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Find Any Unicode Symbol <span class="highlight">Instantly</span></h1>
+            <p class="hero-subtitle">Search through 7,500+ Unicode symbols, emojis, and special characters. Click to copy.</p>
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search symbols... (e.g., arrow, heart, dollar, pi)" autocomplete="off" autofocus>
+                    <button id="clearSearch" class="clear-btn" title="Clear search" style="display:none;">✕</button>
+                </div>
+                <div class="search-stats" id="searchStats"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <div class="container">
+            <a href="categories.html" class="browse-categories-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Browse All Categories
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Results Grid -->
+    <section class="results-section">
+        <div class="container">
+            <div class="results-header" id="resultsHeader">
+                <h2 class="results-title" id="resultsTitle">All Symbols</h2>
+                <span class="results-count" id="resultsCount"></span>
+            </div>
+            <div class="results-grid" id="resultsGrid">
+                <!-- Cards injected by JS -->
+            </div>
+            <div class="no-results" id="noResults" style="display:none;">
+                <div class="no-results-icon">🔍</div>
+                <h3>No symbols found</h3>
+                <p>Try a different search term or browse categories above.</p>
+            </div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading symbols...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Copy Toast -->
+    <div class="toast" id="toast">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastMessage">Copied!</span>
+    </div>
+
+    <!-- Symbol Detail Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-symbol" id="modalSymbol"></div>
+            <h3 class="modal-name" id="modalName"></h3>
+            <div class="modal-details">
+                <div class="detail-row">
+                    <span class="detail-label">Unicode</span>
+                    <span class="detail-value" id="modalUnicode"></span>
+                    <button class="copy-small-btn" data-copy="unicode" title="Copy Unicode">Copy</button>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">HTML Entity</span>
+                    <span class="detail-value" id="modalHtml"></span>
+                    <button class="copy-small-btn" data-copy="html" title="Copy HTML">Copy</button>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Symbol</span>
+                    <span class="detail-value" id="modalChar"></span>
+                    <button class="copy-small-btn" data-copy="char" title="Copy Symbol">Copy</button>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Category</span>
+                    <span class="detail-value" id="modalCategory"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About UniSearch</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Real-time search powered by client-side indexing. No server required.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">📋</div>
+                    <h3>One-Click Copy</h3>
+                    <p>Copy any symbol, Unicode value, or HTML entity with a single click.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🧩</div>
+                    <h3>Chrome Extension</h3>
+                    <p>Access symbols from anywhere with our lightweight Chrome extension.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">📱</div>
+                    <h3>Responsive</h3>
+                    <p>Works perfectly on desktop, tablet, and mobile devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🔣</span> UniSearch
+                </div>
+                <p class="footer-text">&copy; 2026 UniSearch. Free to use for everyone.</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy</a>
+                    <a href="#" class="footer-link">Terms</a>
+                    <a href="https://github.com" target="_blank" class="footer-link">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
